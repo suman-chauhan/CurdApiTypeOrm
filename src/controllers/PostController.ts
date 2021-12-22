@@ -10,6 +10,8 @@ class PostController {
     // console.log(haspassword);
     
     const newUser = {
+        name:req.body.name,
+        phone:req.body.phone,
       email: req.body.email,
       password: req.body.password
     };

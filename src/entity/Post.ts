@@ -11,6 +11,12 @@ import {
     id: number;
   
     @Column()
+    name: string;
+
+    @Column()
+    phone: number;
+
+    @Column()
     email: string;
    
   
