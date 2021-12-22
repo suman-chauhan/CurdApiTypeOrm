@@ -1,14 +1,9 @@
 import { Request, Response } from "express";
 import { getRepository } from "typeorm";
 import { Post } from "../entity/Post";
-import bcrypt from "bcrypt"
 class PostController {
   static createUser = async (req: Request, res: Response) => {
-    // const password = req.body.password;
-    // const salt  = await bcrypt.genSalt(10);
-    // const haspassword = await bcrypt.hash(password,salt);
-    // console.log(haspassword);
-    
+  
     const newUser = {
         name:req.body.name,
         phone:req.body.phone,
