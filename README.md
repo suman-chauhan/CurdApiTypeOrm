@@ -1,4 +1,4 @@
-# Awesome Project Build with TypeORM
+# Backend dev
 
 Steps to run this project:
 

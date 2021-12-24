@@ -3,7 +3,7 @@ import { createConnection } from "typeorm";
 import * as express from "express";
 import * as BodyParser from "body-parser";
 import * as cors from "cors";
-import postRoutes from "./routes/postRoutes";
+import postRoutes from "./routes/userRoutes";
 
 createConnection()
   .then(async (connection) => {

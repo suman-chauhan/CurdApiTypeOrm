@@ -4,7 +4,7 @@
    "port": 5432,
    "username": "postgres",
    "password": "suman",
-   "database": "RestApi",
+   "database": "BackendDev",
    "synchronize": true,
    "logging": false,
    "entities": [

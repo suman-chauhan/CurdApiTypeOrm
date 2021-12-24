@@ -6,7 +6,7 @@ import {
   } from "typeorm";
   
   @Entity()
-  export class Post {
+  export class User {
     @PrimaryGeneratedColumn()
     id: number;
   
@@ -14,7 +14,7 @@ import {
     name: string;
 
     @Column()
-    phone: number;
+    phone: string;
 
     @Column()
     email: string;
