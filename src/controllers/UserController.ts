@@ -1,3 +1,4 @@
+import { json } from "body-parser";
 import { Request, Response } from "express";
 import { getRepository } from "typeorm";
 import { User } from "../entity/user";
@@ -5,7 +6,6 @@ import Userschema from "../Valdation/Schema";
 const bcrypt = require("bcryptjs");
 
 class UserController {
-
   //create a new user
   static createUser = async (req: Request, res: Response) => {
     let Data: any;
@@ -25,14 +25,17 @@ class UserController {
   static getUsers = async (req: Request, res: Response) => {
     const id = req.params.id;
     const phone = req.params.phone;
+    let OneUser: any;
     if (id === undefined && phone === undefined) {
       const result = await getRepository(User).find();
       return res.json(result);
     } else {
-      const OneUser = await getRepository(User).findOne(
+      OneUser = await getRepository(User).findOne(
         { id: id } && { phone: phone }
       );
-      return res.json(OneUser);
+      if (OneUser === undefined) {
+        return res.status(404).send("user not found");
+      } else return res.status(200).json(OneUser);
     }
   };
 
@@ -40,7 +43,7 @@ class UserController {
   static updateUser = async (req: Request, res: Response) => {
     const id: string = req.params.id;
     const phone: string = req.params.phone;
-    const Data:any = await getRepository(User).findOne(
+    const Data: any = await getRepository(User).findOne(
       { id: id } && { phone: phone }
     );
     if (Data) {
@@ -56,7 +59,7 @@ class UserController {
     const id: string = req.params.id;
     const phone: string = req.params.phone;
 
-    const Data:any = await getRepository(User).findOne(
+    const Data: any = await getRepository(User).findOne(
       { id: id } && { phone: phone }
     );
     if (Data) {

@@ -22,7 +22,7 @@ const options = {
 			},
 		],
 	},
-	apis: ["./routes/*.ts"],
+	apis: ["./src/routes/userRoutes.ts"],
   explorer:true
 };
 
