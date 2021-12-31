@@ -134,7 +134,7 @@ router.get("/getUsers/:id/:phone", UserController.getUsers);
  * @swagger
  * /updateUser/{id}/{phone}:
  *  put:
- *    summary: Update the User by the id and mobile
+ *    summary: Update the User by the id and  phone number
  *    tags: {Users}
  *    parameters:
  *     - name: id

@@ -18,7 +18,9 @@ class UserController {
     }
     const UserData: any = getRepository(User).create(Data);
     const result: any = await getRepository(User).save(UserData);
-    return res.status(200).json(result);
+    if (result) {
+      return res.status(200).json(result);
+     } else  return res.json({ msg: "some error occured during cretae a user" });
   };
 
   //get  a new user/all user
@@ -28,14 +30,15 @@ class UserController {
     let OneUser: any;
     if (id === undefined && phone === undefined) {
       const result = await getRepository(User).find();
-      return res.json(result);
+      return res.status(200).send(result);
     } else {
       OneUser = await getRepository(User).findOne(
         { id: id } && { phone: phone }
       );
-      if (OneUser === undefined) {
-        return res.status(404).send("user not found");
-      } else return res.status(200).json(OneUser);
+      if (OneUser) {
+       return res.status(200).json(OneUser);
+
+      } else  return res.json({ msg: `User Not Found with id : ${id} and phone : ${phone} `});
     }
   };
 
@@ -51,7 +54,7 @@ class UserController {
       const result = await getRepository(User).save(Data);
       return res.json(result);
     }
-    return res.json({ msg: "User Not Found" });
+     return res.json({ msg: `User Not Found with id : ${id} and phone : ${phone} `});
   };
 
   //delete a user
@@ -66,7 +69,7 @@ class UserController {
       getRepository(User).delete({ id: id } && { phone: phone });
       return res.json({ msg: "User deleted sucessfully from record" });
     }
-    return res.json({ msg: "User Not Found" });
+    return res.json({ msg: `User Not Found with id : ${id} and phone : ${phone} `});
   };
 }
 export default UserController;

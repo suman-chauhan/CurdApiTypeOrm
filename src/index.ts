@@ -1,13 +1,10 @@
 import "reflect-metadata";
 import { createConnection } from "typeorm";
-import * as express from "express";
-import * as BodyParser from "body-parser";
-import * as cors from "cors";
-import postRoutes from "./routes/userRoutes";
 const swaggerUI = require("swagger-ui-express");
 const swaggerJsDoc = require("swagger-jsdoc");
 import router from "./routes/userRoutes";
-
+import app from './app'
+import { PORT } from "./config";
 const options = {
 	definition: {
 		openapi: "3.0.0",
@@ -18,29 +15,23 @@ const options = {
 		},
 		servers: [
 			{
-				url: "http://localhost:8080",
+				url: `http://localhost:${PORT}`,
 			},
 		],
 	},
 	apis: ["./src/routes/userRoutes.ts"],
-  explorer:true
+	explorer: true
 };
+
 
 const specs = swaggerJsDoc(options);
 
-
-
-
-
 createConnection()
-  .then(async (connection) => {
-    const app = express();
-    app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(specs));
-    app.use(cors());
-    app.use(BodyParser.json());
+	.then(async (connection) => {
 
-    app.use("/", postRoutes);
+		app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(specs));
 
-    app.listen(8080, () => console.log("App is running at port 8080."));
-  })
-  .catch((error) => console.log(error));
+		app.listen(PORT)
+		console.log(`App is running at port ${PORT}`);
+    })
+	.catch((error) => console.log(error));
