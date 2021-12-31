@@ -120,12 +120,12 @@ it('should   remove an  user with  id and phone number  ', async() => {
 });
 
 
-// it('should  not remove an  user with  invalid id and phone number ', async() => {
-//   const id =10;
-//   const phone = '0023456789'
-//   response = await request(app).delete(`/deleteUser/${id}/${phone}`);
-//   expect(response.statusCode).toBe(200); 
+it('should  not remove an  user with  invalid id and phone number ', async() => {
+  const id =10;
+  const phone = '0023456789'
+  response = await request(app).delete(`/deleteUser/${id}/${phone}`);
+  expect(response.statusCode).toBe(200); 
  
-//  console.log(response.body);
+ console.log(response.body);
   
-// });
+});
